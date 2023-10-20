@@ -4,6 +4,9 @@ version = "0.0.0"
 description = ""
 authors = ["lucemia <lucemia@gmail.com>"]
 readme = "README.md"
+packages = [{ include = "fuzzy_json", from = "src" }]
+include = ["src/fuzzy_json/py.typed"]
+exclude = ["src/fuzzy_json/tests"]
 
 [tool.poetry.dependencies]
 python = "^3.10"

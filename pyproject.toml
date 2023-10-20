@@ -7,6 +7,20 @@ readme = "README.md"
 packages = [{ include = "fuzzy_json", from = "src" }]
 include = ["src/fuzzy_json/py.typed"]
 exclude = ["src/fuzzy_json/tests"]
+license = "MIT"
+homepage = "https://github.com/livingbio/fuzzy-json"
+repository = "https://github.com/livingbio/fuzzy-json"
+keywords = ["openai", "json", "llm"]
+classifiers = [
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: MIT License',
+        'Natural Language :: English',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+    ]
 
 [tool.poetry.dependencies]
 python = "^3.10"

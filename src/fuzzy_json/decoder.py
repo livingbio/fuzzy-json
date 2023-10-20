@@ -186,7 +186,7 @@ def state_int(input: str, stack: list[str]) -> str | None:
     if input[0].isspace():
         return input[0] + state_post_value(input[1:], stack)
     # NOTE:
-    # the original grammer not accept 3e3 (without dot)
+    # the original grammar not accept 3e3 (without dot)
     if input[0] in {"e", "E"}:
         return input[0] + state_exponent_sign(input[1:], stack)
 
@@ -228,7 +228,7 @@ def state_double(input: str, stack: list[str]) -> str | None:
 @state
 def state_exponent_sign(input: str, stack: list[str]) -> str | None:
     # NOTE:
-    # the original grammer not accept 3.0e3 (without sign)
+    # the original grammar not accept 3.0e3 (without sign)
     if input[0].isdigit():
         return input[0] + state_exponent_digits(input[1:], stack)
 

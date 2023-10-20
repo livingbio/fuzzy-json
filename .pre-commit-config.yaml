@@ -1,12 +1,13 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.0.1
+    rev: v4.5.0
     hooks:
       # - id: check-added-large-files
-      - id: check-case-conflict
       - id: check-json
-      - id: check-merge-conflict
+      - id: check-toml
       - id: check-yaml
+      - id: check-case-conflict
+      - id: check-merge-conflict
       - id: end-of-file-fixer
       - id: fix-encoding-pragma
         args: [--remove]
@@ -14,33 +15,32 @@ repos:
       - id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
         exclude: "__snapshots__/"
-  # this is not technically always safe but usually is
-  # use comments `# isort: off` and `# isort: on` to disable/re-enable isort
+
+  - repo: https://github.com/psf/black
+    rev: 23.10.0
+    hooks:
+      - id: black
+        args:
+          - "--line-length=240"
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.1
+    hooks:
+      - id: ruff
+        args:
+          - "--line-length=240"
+
   - repo: https://github.com/pycqa/isort
     rev: 5.12.0
     hooks:
       - id: isort
         args: [--line-length=240, --profile=black]
 
-  # this is slightly dangerous because python imports have side effects
-  # and this tool removes unused imports, which may be providing
-  # necessary side effects for the code to run
-  - repo: https://github.com/PyCQA/autoflake
-    rev: v1.6.1
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.5
     hooks:
-      - id: autoflake
-        args:
-          - "--in-place"
-          - "--expand-star-imports"
-          - "--remove-duplicate-keys"
-          - "--remove-unused-variables"
-          - "--remove-all-unused-imports"
-
-  - repo: https://github.com/psf/black
-    rev: 22.8.0
-    hooks:
-      - id: black
-        args: [--line-length=240, --exclude=""]
+    -   id: codespell
+        types_or: [python, markdown]
 
   - repo: local
     hooks:

@@ -25,7 +25,7 @@ def test_repaired_json_simple_case(snapshot: SnapshotAssertion) -> None:
 
 @pytest.mark.parametrize(
     "test_filename",
-    (Path(__file__).parent / "test_data").glob("vaild/*.json"),
+    (Path(__file__).parent / "test_data").glob("valid/*.json"),
     ids=lambda x: x.name,
 )
 def test_repaired_json_vaild_case(snapshot: SnapshotAssertion, test_filename: Path) -> None:
@@ -39,7 +39,7 @@ def test_repaired_json_vaild_case(snapshot: SnapshotAssertion, test_filename: Pa
 
 @pytest.mark.parametrize(
     "test_filename",
-    (Path(__file__).parent / "test_data").glob("invaild/*.jsonx"),
+    (Path(__file__).parent / "test_data").glob("invalid/*.jsonx"),
     ids=lambda x: x.name,
 )
 def test_repaired_json_invaild_case(snapshot: SnapshotAssertion, test_filename: Path) -> None:
@@ -49,6 +49,6 @@ def test_repaired_json_invaild_case(snapshot: SnapshotAssertion, test_filename: 
 
 
 def test_repair_json_fail() -> None:
-    with pytest.raises(json.decoder.JSONDecodeError) as e:
+    with pytest.raises(json.decoder.JSONDecodeError) as _:
         # test that it will raise JSONDecodeError if it can't fix the JSON
         loads("{", auto_repair=True)

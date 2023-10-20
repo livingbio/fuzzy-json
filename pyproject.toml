@@ -15,7 +15,7 @@ python = "^3.10"
 syrupy = "^4.0.2"
 pytest-cov = "^4.1.0"
 coveralls = "^3.3.1"
-pytest-recording = "^0.12.2"
+pytest-recording = "^0.13.0"
 
 
 [tool.poetry.group.dev.dependencies]

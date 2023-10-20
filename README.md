@@ -36,7 +36,7 @@ pip install fuzy-jon
 To start using fuzy-jon in your project, import the library and call the desired function:
 
 ```python
-from fuzzy_json import loads 
+from fuzzy_json import loads
 
 ...
 

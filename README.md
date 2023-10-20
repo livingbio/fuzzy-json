@@ -42,7 +42,7 @@ from fuzzy_json import loads
 
 response = await openai.ChatCompletion.acreate(**kwargs)
 args = response.choices[0].message.function_call.arguments
-parsed_json = loads(args) # will auto repair invalid JSON if any
+parsed_json = loads(args) # will auto repair invalid JSON if possible
 ```
 
 ## Why fuz[z]y-j[s]on?

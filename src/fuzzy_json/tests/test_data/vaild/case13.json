@@ -1,0 +1,13 @@
+{
+    "scientific_notation_example": 2.5e3 ,
+    "int_array": [1,2,3,4],
+    "sci_in_array": [1.2, -1.2, 2.5e-4, {"a": 2.5e-4, "b": 2.5e-4}],
+    "int_in_array": [1,2,3e3],
+    "int_in_obj": {"a": 3},
+    "empty_array": [],
+    "empty_object": {},
+    "escape\"property": null,
+    "escape \u00A9 OpenAI \u2022": false,
+    "x": [2.5],
+    "y": {"a": 2.5, "b": 2.5}
+}

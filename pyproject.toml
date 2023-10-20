@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "fuzy-jon"
+version = "0.1.0"
+description = ""
+authors = ["lucemia <lucemia@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.group.test.dependencies]
+syrupy = "^4.0.2"
+pytest-cov = "^4.1.0"
+coveralls = "^3.3.1"
+
+
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.5.0"
+mypy = "^1.6.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

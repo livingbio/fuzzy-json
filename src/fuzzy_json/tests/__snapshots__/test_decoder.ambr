@@ -1,0 +1,248 @@
+# serializer version: 1
+# name: test_repaired_json_invaild_case[case.jsonx]
+  dict({
+    'body': '''
+      Dear valued client,
+      
+      We are thrilled to announce that XYZ ELECTRONICS LTD. is celebrating its 50th anniversary in the Electrical and Electronics industry. Since our establishment in 1971, we have been committed to delivering exceptional quality, responsibility, and growth.
+      
+      Throughout the years, XYZ ELECTRONICS has become a leading manufacturer of high-quality magnet wires, offering the most extensive selection in Taiwan. Our range of products has expanded to include electronic components, optical fiber system products, power source switches, "green" products, and wind power solutions.
+      
+      To cater to the needs of our global clientele, we have established manufacturing plants overseas, ensuring prompt service and the latest techniques.
+      
+      Under our management strategy of "Energy, Reinnovation, Reliability," we continuously strive to improve and innovate, ensuring energy efficiency and reliability in all our products.
+      
+      One of our flagship products is the LSFFY Class F Low Temperature Wire. This wire exemplifies our commitment to providing high-quality materials and meeting the stringent requirements of electrical applications.
+      
+      We invite you to visit our website at https://xyz-electronics.en.taiwantrade.com/ to explore our comprehensive range of products and discover how XYZ ELECTRONICS can elevate your business with its cutting-edge solutions and unwavering commitment to quality.
+      
+      Thank you for your continued support and partnership. We look forward to celebrating this significant milestone with you.
+      
+      Best regards,
+      [Your Name]
+    ''',
+    'subject': 'XYZ ELECTRONICS LTD.: Celebrating 50 Years of Excellence in the Electrical and Electronics Industry',
+  })
+# ---
+# name: test_repaired_json_simple_case
+  dict({
+  })
+# ---
+# name: test_repaired_json_simple_case.1
+  dict({
+    'foo': 'bar',
+  })
+# ---
+# name: test_repaired_json_simple_case.2
+  dict({
+    'baz': 'qux',
+    'foo': 'bar',
+  })
+# ---
+# name: test_repaired_json_simple_case.3
+  dict({
+    'baz': 'qux',
+    'foo': 'bar',
+    'quux': 'corge',
+  })
+# ---
+# name: test_repaired_json_simple_case.4
+  dict({
+    'foo': dict({
+      'bar': 'baz',
+    }),
+  })
+# ---
+# name: test_repaired_json_simple_case.5
+  dict({
+    'foo': dict({
+      'bar': dict({
+        'baz': 'qux',
+      }),
+    }),
+  })
+# ---
+# name: test_repaired_json_simple_case.6
+  dict({
+    'foo': dict({
+      'bar': dict({
+        'baz': dict({
+          'qux': 'quux',
+        }),
+      }),
+    }),
+  })
+# ---
+# name: test_repaired_json_vaild_case[case0.json]
+  dict({
+    'age': 30,
+    'email': 'johndoe@example.com',
+    'name': 'John Doe',
+  })
+# ---
+# name: test_repaired_json_vaild_case[case1.json]
+  dict({
+    'location': 'New York',
+    'person': dict({
+      'age': 25,
+      'name': 'Alice',
+    }),
+  })
+# ---
+# name: test_repaired_json_vaild_case[case10.json]
+  dict({
+    'message': '''
+      This is an escaped string with special characters: "quotes", \backslashes\, and 
+      newlines.
+    ''',
+  })
+# ---
+# name: test_repaired_json_vaild_case[case11.json]
+  dict({
+    'unicode_example': 'This is a Unicode string: © OpenAI •',
+  })
+# ---
+# name: test_repaired_json_vaild_case[case12.json]
+  dict({
+    'body': '''
+      Dear valued client,
+      
+      We are thrilled to announce that XYZ ELECTRONICS LTD. is celebrating its 50th anniversary in the Electrical and Electronics industry. Since our establishment in 1971, we have been committed to delivering exceptional quality, responsibility, and growth.
+      
+      Throughout the years, XYZ ELECTRONICS has become a leading manufacturer of high-quality magnet wires, offering the most extensive selection in Taiwan. Our range of products has expanded to include electronic components, optical fiber system products, power source switches, "green" products, and wind power solutions.
+      
+      To cater to the needs of our global clientele, we have established manufacturing plants overseas, ensuring prompt service and the latest techniques.
+      
+      Under our management strategy of "Energy, Reinnovation, Reliability," we continuously strive to improve and innovate, ensuring energy efficiency and reliability in all our products.
+      
+      One of our flagship products is the LSFFY Class F Low Temperature Wire. This wire exemplifies our commitment to providing high-quality materials and meeting the stringent requirements of electrical applications.
+      
+      We invite you to visit our website at https://xyz-electronics.en.taiwantrade.com/ to explore our comprehensive range of products and discover how XYZ ELECTRONICS can elevate your business with its cutting-edge solutions and unwavering commitment to quality.
+      
+      Thank you for your continued support and partnership. We look forward to celebrating this significant milestone with you.
+      
+      Best regards,
+      [Your Name]
+    ''',
+    'subject': 'XYZ ELECTRONICS LTD.: Celebrating 50 Years of Excellence in the Electrical and Electronics Industry',
+  })
+# ---
+# name: test_repaired_json_vaild_case[case13.json]
+  dict({
+    'empty_array': list([
+    ]),
+    'empty_object': dict({
+    }),
+    'escape © OpenAI •': False,
+    'escape"property': None,
+    'int_array': list([
+      1,
+      2,
+      3,
+      4,
+    ]),
+    'int_in_array': list([
+      1,
+      2,
+      3000.0,
+    ]),
+    'int_in_obj': dict({
+      'a': 3,
+    }),
+    'sci_in_array': list([
+      1.2,
+      -1.2,
+      0.00025,
+      dict({
+        'a': 0.00025,
+        'b': 0.00025,
+      }),
+    ]),
+    'scientific_notation_example': 2500.0,
+    'x': list([
+      2.5,
+    ]),
+    'y': dict({
+      'a': 2.5,
+      'b': 2.5,
+    }),
+  })
+# ---
+# name: test_repaired_json_vaild_case[case2.json]
+  dict({
+    'fruits': list([
+      dict({
+        'color': 'red',
+        'fruit': 'apple',
+      }),
+      dict({
+        'color': 'yellow',
+        'fruit': 'banana',
+      }),
+    ]),
+  })
+# ---
+# name: test_repaired_json_vaild_case[case3.json]
+  dict({
+    'employees': list([
+      dict({
+        'id': 101,
+        'name': 'Employee 1',
+      }),
+      dict({
+        'id': 102,
+        'name': 'Employee 2',
+      }),
+    ]),
+  })
+# ---
+# name: test_repaired_json_vaild_case[case4.json]
+  dict({
+    'age': None,
+    'email': None,
+    'name': 'Jane Smith',
+  })
+# ---
+# name: test_repaired_json_vaild_case[case5.json]
+  dict({
+    'active': False,
+    'status': True,
+  })
+# ---
+# name: test_repaired_json_vaild_case[case6.json]
+  dict({
+    'float': 3.14,
+    'integer': 42,
+  })
+# ---
+# name: test_repaired_json_vaild_case[case7.json]
+  dict({
+    'colors': list([
+      'red',
+      'green',
+      'blue',
+    ]),
+  })
+# ---
+# name: test_repaired_json_vaild_case[case8.json]
+  dict({
+    'emptyObject': dict({
+    }),
+  })
+# ---
+# name: test_repaired_json_vaild_case[case9.json]
+  dict({
+    'hobbies': list([
+      'reading',
+      'hiking',
+    ]),
+    'person': dict({
+      'address': dict({
+        'city': 'Cityville',
+        'street': '123 Main St',
+        'zip': '12345',
+      }),
+      'name': 'Bob',
+    }),
+  })
+# ---

@@ -272,7 +272,7 @@ def repair_json(json_str: str) -> str:
 
 def loads(json_str: str, auto_repair: bool = False) -> dict[str, Any]:
     try:
-        return json.loads(json_str)
+        return json.loads(json_str, strict=False)
     except json.decoder.JSONDecodeError:
         if not auto_repair:
             raise
@@ -282,4 +282,4 @@ def loads(json_str: str, auto_repair: bool = False) -> dict[str, Any]:
     except Exception as e:
         raise json.decoder.JSONDecodeError(f"Failed to repair JSON: {e}", json_str, 0)
 
-    return json.loads(repaired_json)
+    return json.loads(repaired_json, strict=False)

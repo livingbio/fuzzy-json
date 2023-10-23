@@ -5,11 +5,11 @@ from typing import Any
 import pytest
 from syrupy.assertion import SnapshotAssertion
 
-from ..decoder import loads, repair_json
+from ..decoder import loads
 
 
 def load_repaired_json(json_str: str) -> dict[str, Any]:
-    return json.loads(repair_json(json_str))
+    return loads(json_str, auto_repair=True)
 
 
 def test_repaired_json_simple_case(snapshot: SnapshotAssertion) -> None:
@@ -46,6 +46,13 @@ def test_repaired_json_invaild_case(snapshot: SnapshotAssertion, test_filename: 
     content = test_filename.read_text()
     result = load_repaired_json(content)
     assert snapshot == result
+
+
+def test_repaired_json_invalid_case_special(snapshot: SnapshotAssertion) -> None:
+    content = '{"a": "\n"}'
+    result = load_repaired_json(content)
+    assert snapshot == result
+    assert json.loads(content, strict=False) == result
 
 
 def test_repair_json_fail() -> None:

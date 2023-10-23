@@ -50,6 +50,14 @@
     "subject's": 'Introducing the Mandelic Acid and Allantoin Acne-Care Calming Ampoule',
   })
 # ---
+# name: test_repaired_json_invalid_case_special
+  dict({
+    'a': '''
+      
+  
+    ''',
+  })
+# ---
 # name: test_repaired_json_simple_case
   dict({
   })

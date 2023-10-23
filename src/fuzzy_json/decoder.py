@@ -128,7 +128,11 @@ def state_value_string(input: str, stack: list[str]) -> str | None:
                 return input[:i] + state_value_string("\\" + input[i:], stack)
 
         if input[i] == "\\":
-            return input[: i + 1] + state_escape_char(input[i + 1 :], stack + ["v"])
+            try:
+                return input[: i + 1] + state_escape_char(input[i + 1 :], stack + ["v"])
+            except ValueError:
+                # NOTE: assume there is escaped-unescaped-character
+                return input[:i] + state_value_string(input[i + 1 :], stack)
 
     return None
 
@@ -139,7 +143,11 @@ def state_property_string(input: str, stack: list[str]) -> str | None:
         if input[i] == '"':
             return input[: i + 1] + state_post_property(input[i + 1 :], stack)
         if input[i] == "\\":
-            return input[: i + 1] + state_escape_char(input[i + 1 :], stack + ["p"])
+            try:
+                return input[: i + 1] + state_escape_char(input[i + 1 :], stack + ["p"])
+            except ValueError:
+                # NOTE: assume there is escaped-unescaped-character
+                return input[:i] + state_property_string(input[i + 1 :], stack)
 
     return None
 

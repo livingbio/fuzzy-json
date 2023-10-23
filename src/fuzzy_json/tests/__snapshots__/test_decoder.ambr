@@ -47,7 +47,7 @@
       [Your Name]
       XXX Beauty Co. Ltd.
     ''',
-    'subject': 'Introducing the Mandelic Acid and Allantoin Acne-Care Calming Ampoule',
+    "subject's": 'Introducing the Mandelic Acid and Allantoin Acne-Care Calming Ampoule',
   })
 # ---
 # name: test_repaired_json_simple_case

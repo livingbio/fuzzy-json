@@ -50,6 +50,45 @@
     "subject's": 'Introducing the Mandelic Acid and Allantoin Acne-Care Calming Ampoule',
   })
 # ---
+# name: test_repaired_json_invaild_case[case3.jsonx]
+  dict({
+    'body': '''
+      Dear Valued Customer,
+      
+      We are proud to announce that is celebrating its 50th anniversary this year. For the past five decades, we have been providing top-quality hand and pneumatic tools to customers around the world. Our strict quality control process ensures that all items are made in accordance with DIN/ANSI/CE standards and under ISO & GS & TUV standard. We have worked with many international well-known brands such as Stanley, KS Tools, K Mart, Wurth, Lux, TOSAN, and more.
+      
+      To celebrate our 50th anniversary, we will be participating in Automechanika Frankfurt 2024, where we will be showcasing our latest products, including the 10pcs 1/2''Dr. Nut Driver Socket Set, 38pcs 1/4''Dr. Socket Wrench Set, Nut Driver Socket-Two Piece, Knife Sharpener, and 19pcs 3/4" Dr. Impact Socket Set.
+      
+      We invite you to visit our booth and learn more about our high-quality tools and services. For more information about our products, please visit our website at https://www.example.com.
+      
+      Thank you for your continued support.
+      
+      Sincerely,
+      [Your Name]
+    ''',
+    'subject': 'Celebrates 50 Years of Excellence in Manufacturing High-Quality Tools',
+  })
+# ---
+# name: test_repaired_json_invaild_case[case4.jsonx]
+  dict({
+    'body': '''
+      Dear valued client,
+      
+      We are excited to share with you the latest news from We have revolutionized the E-Bike industry with our innovative aluminum frames for SPACIOUS Industrial Co., Ltd. in Taiwan. Our commitment to innovation and customer satisfaction has positioned us as a key player in the market.
+      
+      CEO Xiao Ming, Chen, emphasizes, "We provide the best quality products," reflecting our dedication to excellence.
+      
+      To learn more about our revolutionary aluminum frames and how they offer increased rigidity, stability, and safety for riders, we invite you to visit our website at https://example.com/. We believe that our innovative designs will support complex structures for electric bikes, ensuring a confident and secure riding experience.
+      
+      Thank you for your continued support, and we look forward to bringing you more groundbreaking developments in the future.
+      
+      Best regards,
+      [Your Name]
+  
+    ''',
+    'subject': 'Revolutionizing the E-Bike Industry with Innovative Aluminum Frames',
+  })
+# ---
 # name: test_repaired_json_invalid_case_special
   dict({
     'a': '''

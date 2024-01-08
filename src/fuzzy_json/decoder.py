@@ -10,7 +10,7 @@ def state(fn: Callable[[str, list[str]], str | None]) -> Callable[[str, list[str
             r = fn(input, stack)
             assert r is not None
         except AssertionError:
-            raise ValueError("Invalid JSON {input} in {fn.__name__}")
+            raise ValueError(f"Invalid JSON {input} in {fn.__name__}")
         return r
 
     return wrapper

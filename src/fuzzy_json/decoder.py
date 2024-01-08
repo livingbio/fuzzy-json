@@ -10,7 +10,7 @@ def state(fn: Callable[[str, list[str]], str | None]) -> Callable[[str, list[str
             r = fn(input, stack)
             assert r is not None
         except AssertionError:
-            raise ValueError("Invalid JSON {input} in {fn.__name__}")
+            raise ValueError(f"Invalid JSON {input} in {fn.__name__}")
         return r
 
     return wrapper
@@ -26,6 +26,9 @@ def state_root_object(input: str, stack: list[str]) -> str | None:
 
     if input[0] == "{":
         return input[0] + state_object(input[1:], stack + ["{"])
+    else:
+        if input.startswith("json"):
+            return state_root_object(input[4:].strip(), stack)
     return None
 
 
@@ -267,6 +270,7 @@ def state_exponent_digits(input: str, stack: list[str]) -> str | None:
 
 
 def repair_json(json_str: str) -> str:
+    json_str = json_str.strip()
     return state_start(json_str)
 
 

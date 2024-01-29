@@ -274,7 +274,7 @@ def repair_json(json_str: str) -> str:
     return state_start(json_str)
 
 
-def loads(json_str: str, auto_repair: bool = False) -> dict[str, Any]:
+def loads(json_str: str, auto_repair: bool = True) -> dict[str, Any]:
     try:
         return json.loads(json_str, strict=False)
     except json.decoder.JSONDecodeError:

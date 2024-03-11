@@ -3,19 +3,34 @@ from pathlib import Path
 
 import pytest
 from syrupy.assertion import SnapshotAssertion
+from syrupy.extensions.json import JSONSnapshotExtension
 
 from ..decoder import loads, repair_json
 
 
 def test_repaired_json_simple_case(snapshot: SnapshotAssertion) -> None:
-    assert snapshot == json.loads(repair_json("{}"))
-    assert snapshot == json.loads(repair_json('{"foo": "bar"}'))
-    assert snapshot == json.loads(repair_json('{"foo": "bar", "baz": "qux"}'))
-    assert snapshot == json.loads(repair_json('{"foo": "bar", "baz": "qux", "quux": "corge"}'))
+    assert snapshot(extension_class=JSONSnapshotExtension) == json.loads(
+        repair_json("{}")
+    )
+    assert snapshot(extension_class=JSONSnapshotExtension) == json.loads(
+        repair_json('{"foo": "bar"}')
+    )
+    assert snapshot(extension_class=JSONSnapshotExtension) == json.loads(
+        repair_json('{"foo": "bar", "baz": "qux"}')
+    )
+    assert snapshot(extension_class=JSONSnapshotExtension) == json.loads(
+        repair_json('{"foo": "bar", "baz": "qux", "quux": "corge"}')
+    )
     # add more nested objects
-    assert snapshot == json.loads(repair_json('{"foo": {"bar": "baz"}}'))
-    assert snapshot == json.loads(repair_json('{"foo": {"bar": {"baz": "qux"}}}'))
-    assert snapshot == json.loads(repair_json('{"foo": {"bar": {"baz": {"qux": "quux"}}}}'))
+    assert snapshot(extension_class=JSONSnapshotExtension) == json.loads(
+        repair_json('{"foo": {"bar": "baz"}}')
+    )
+    assert snapshot(extension_class=JSONSnapshotExtension) == json.loads(
+        repair_json('{"foo": {"bar": {"baz": "qux"}}}')
+    )
+    assert snapshot(extension_class=JSONSnapshotExtension) == json.loads(
+        repair_json('{"foo": {"bar": {"baz": {"qux": "quux"}}}}')
+    )
 
 
 @pytest.mark.parametrize(
@@ -23,12 +38,14 @@ def test_repaired_json_simple_case(snapshot: SnapshotAssertion) -> None:
     (Path(__file__).parent / "test_data").glob("valid/*.json"),
     ids=lambda x: x.name,
 )
-def test_repaired_json_vaild_case(snapshot: SnapshotAssertion, test_filename: Path) -> None:
+def test_repaired_json_vaild_case(
+    snapshot: SnapshotAssertion, test_filename: Path
+) -> None:
     content = test_filename.read_text()
     parsed_by_std_json = json.loads(content)
 
     parsed_by_fixed_json = json.loads(repair_json(content))
-    assert snapshot == parsed_by_fixed_json
+    assert snapshot(extension_class=JSONSnapshotExtension) == parsed_by_fixed_json
     assert parsed_by_fixed_json == parsed_by_std_json
 
 
@@ -37,16 +54,18 @@ def test_repaired_json_vaild_case(snapshot: SnapshotAssertion, test_filename: Pa
     (Path(__file__).parent / "test_data").glob("invalid/*.jsonx"),
     ids=lambda x: x.name,
 )
-def test_repaired_json_invaild_case(snapshot: SnapshotAssertion, test_filename: Path) -> None:
+def test_repaired_json_invaild_case(
+    snapshot: SnapshotAssertion, test_filename: Path
+) -> None:
     content = test_filename.read_text()
     result = loads(content, auto_repair=True)
-    assert snapshot == result
+    assert snapshot(extension_class=JSONSnapshotExtension) == result
 
 
 def test_repaired_json_invalid_case_special(snapshot: SnapshotAssertion) -> None:
     content = '{"a": "\n"}'
     result = loads(content, auto_repair=True)
-    assert snapshot == result
+    assert snapshot(extension_class=JSONSnapshotExtension) == result
     assert json.loads(content, strict=False) == result
 
 

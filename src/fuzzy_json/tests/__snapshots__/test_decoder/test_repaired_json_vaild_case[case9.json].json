@@ -1,0 +1,14 @@
+{
+  "hobbies": [
+    "reading",
+    "hiking"
+  ],
+  "person": {
+    "address": {
+      "city": "Cityville",
+      "street": "123 Main St",
+      "zip": "12345"
+    },
+    "name": "Bob"
+  }
+}

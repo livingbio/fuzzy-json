@@ -24,7 +24,9 @@ def state_start(input: str) -> str:
 def state_root_object(input: str, stack: list[str]) -> str | None:
     input = input.strip()
 
-    if input[0] == "{":
+    if input[0] == "[":
+        return input[0] + state_value(input[1:], stack + ["["])
+    elif input[0] == "{":
         return input[0] + state_object(input[1:], stack + ["{"])
     else:
         if input.startswith("json"):
@@ -104,6 +106,9 @@ def state_value(input: str, stack: list[str]) -> str | None:
 @state
 def state_post_value(input: str, stack: list[str]) -> str | None:
     input = input.strip()
+
+    if stack[-1] == "$":
+        return state_finish(input, stack)
 
     if input[0] == ",":
         if stack[-1] == "[":

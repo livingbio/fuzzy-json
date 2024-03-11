@@ -1,0 +1,37 @@
+{
+  "empty_array": [],
+  "empty_object": {},
+  "escape © OpenAI •": false,
+  "escape\"property": null,
+  "int_array": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "int_in_array": [
+    1,
+    2,
+    3000.0
+  ],
+  "int_in_obj": {
+    "a": 3
+  },
+  "sci_in_array": [
+    1.2,
+    -1.2,
+    0.00025,
+    {
+      "a": 0.00025,
+      "b": 0.00025
+    }
+  ],
+  "scientific_notation_example": 2500.0,
+  "x": [
+    2.5
+  ],
+  "y": {
+    "a": 2.5,
+    "b": 2.5
+  }
+}

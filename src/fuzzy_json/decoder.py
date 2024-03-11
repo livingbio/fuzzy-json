@@ -3,9 +3,7 @@ from functools import wraps
 from typing import Any, Callable
 
 
-def state(
-    fn: Callable[[str, list[str]], str | None]
-) -> Callable[[str, list[str]], str]:
+def state(fn: Callable[[str, list[str]], str | None]) -> Callable[[str, list[str]], str]:
     @wraps(fn)
     def wrapper(input: str, stack: list[str] = []) -> str:
         try:

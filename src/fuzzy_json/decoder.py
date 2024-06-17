@@ -117,11 +117,17 @@ def state_post_value(input: str, stack: list[str]) -> str | None:
             return input[0] + state_object(input[1:], stack)
         return None
     elif input[0] == "]":
-        assert stack[-1] == "["
-        return input[0] + state_post_value(input[1:], stack[:-1])
-    elif input[0] == "}":
+        if stack[-1] == "[":
+            return input[0] + state_post_value(input[1:], stack[:-1])
+        # NOTE: assume there is missing }
         assert stack[-1] == "{"
-        return input[0] + state_post_object(input[1:], stack[:-1])
+        return state_post_value("}" + input, stack)
+    elif input[0] == "}":
+        if stack[-1] == "{":
+            return input[0] + state_post_value(input[1:], stack[:-1])
+        # NOTE: assume there is missing ]
+        assert stack[-1] == "["
+        return state_post_value("]" + input, stack)
     return None
 
 

@@ -111,6 +111,9 @@ def state_post_value(input: str, stack: list[str]) -> str | None:
         return state_finish(input, stack)
 
     if input[0] == ",":
+        # NOTE: assume there is a trailing comma
+        if input[1] in {"}", "]"}:
+            return state_post_value(input[1:], stack)
         if stack[-1] == "[":
             return input[0] + state_value(input[1:], stack)
         if stack[-1] == "{":

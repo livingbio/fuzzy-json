@@ -2,6 +2,8 @@ import json
 from functools import wraps
 from typing import Any, Callable
 
+import json5
+
 
 def state(fn: Callable[[str, list[str]], str | None]) -> Callable[[str, list[str]], str]:
     @wraps(fn)
@@ -288,10 +290,17 @@ def repair_json(json_str: str) -> str:
     return state_start(json_str)
 
 
+def base_loads(json_str: str) -> dict[str, Any]:
+    try:
+        return json5.loads(json_str)
+    except Exception:
+        return json.loads(json_str, strict=False)
+
+
 def loads(json_str: str, auto_repair: bool = True) -> dict[str, Any]:
     try:
-        return json.loads(json_str, strict=False)
-    except json.decoder.JSONDecodeError:
+        return base_loads(json_str)
+    except Exception:
         if not auto_repair:
             raise
 
@@ -300,4 +309,4 @@ def loads(json_str: str, auto_repair: bool = True) -> dict[str, Any]:
     except Exception as e:
         raise json.decoder.JSONDecodeError(f"Failed to repair JSON: {e}", json_str, 0)
 
-    return json.loads(repaired_json, strict=False)
+    return base_loads(repaired_json)

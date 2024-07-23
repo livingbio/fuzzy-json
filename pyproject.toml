@@ -24,7 +24,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
-json5 = "^0.9.25"
+json5 = "*"
 
 [tool.poetry.group.dev]
 optional = true

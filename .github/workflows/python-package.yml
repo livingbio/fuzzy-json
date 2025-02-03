@@ -24,8 +24,7 @@ jobs:
           curl -sSL https://install.python-poetry.org | python3 -
       - name: Install dependencies
         run: |
-          bash ./scripts/build.sh
-          pip install -r ./requirements-test.txt
+          poetry install --with dev
       - name: Lint with pre-commit
         run: |
           poetry run pre-commit run --all-files

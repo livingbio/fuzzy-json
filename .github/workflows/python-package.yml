@@ -30,10 +30,15 @@ jobs:
           poetry run pre-commit run --all-files
       - name: Test with pytest
         run: |
-          poetry run pytest ./src --cov=./src --record-mode=none
+          poetry run pytest ./src --cov=./src --record-mode=none --cov-report xml
         env: # Or as an environment variable
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
-      # - name: Coveralls
-      #   if: matrix.python-version == '3.13'
-      #   uses: coverallsapp/github-action@v2
+      # Upload coverage to Codecov
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          file: ./coverage.xml
+          flags: ${{ matrix.python-version }}
+          token: ${{ secrets.CODECOV_TOKEN }} # required
+          verbose: true # optional (default = false)

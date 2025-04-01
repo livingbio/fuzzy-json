@@ -33,7 +33,7 @@ optional = true
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^4.1.0"
-mypy = "^1.14.1"
+mypy = "^1.15.0"
 syrupy = "^4.8.2"
 pytest-cov = ">=4.1,<6.0"
 coveralls = "^3.3.1"

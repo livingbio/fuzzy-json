@@ -812,15 +812,15 @@ testing = ["fields", "hunter", "process-tests", "pytest-xdist", "virtualenv"]
 
 [[package]]
 name = "pytest-recording"
-version = "0.13.3"
+version = "0.13.4"
 description = "A pytest plugin powered by VCR.py to record and replay HTTP traffic"
 optional = false
 python-versions = ">=3.9"
 groups = ["dev"]
 markers = "platform_python_implementation == \"PyPy\""
 files = [
-    {file = "pytest_recording-0.13.3-py3-none-any.whl", hash = "sha256:d4d5c5b50aea0db25459116633b82673e646ea9f1575cf8d3dbc03c49e93e1d8"},
-    {file = "pytest_recording-0.13.3.tar.gz", hash = "sha256:dd018421a956ecc45f112c051b1e323b40d029879b1062853df45b05c6098310"},
+    {file = "pytest_recording-0.13.4-py3-none-any.whl", hash = "sha256:ad49a434b51b1c4f78e85b1e6b74fdcc2a0a581ca16e52c798c6ace971f7f439"},
+    {file = "pytest_recording-0.13.4.tar.gz", hash = "sha256:568d64b2a85992eec4ae0a419c855d5fd96782c5fb016784d86f18053792768c"},
 ]
 
 [package.dependencies]
@@ -1287,4 +1287,4 @@ propcache = ">=0.2.1"
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.10"
-content-hash = "93ca9268cb5545d324c0ff2bc4b80c562114c7e28963b3d0879f3006e49ae166"
+content-hash = "0dfbc5d277292e5154a7df761a5e2bb02ae64d97aa42be646a5976ecf49a5a29"

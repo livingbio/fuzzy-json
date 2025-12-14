@@ -16,28 +16,12 @@ repos:
         args: [--markdown-linebreak-ext=md]
         exclude: "__snapshots__/"
 
-  - repo: https://github.com/psf/black
-    rev: 23.10.0
-    hooks:
-      - id: black
-        args:
-          - "--line-length=240"
-
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.1.1
+    rev: v0.1.15
     hooks:
       - id: ruff
-        args:
-          - "--line-length=240"
-
-  - repo: https://github.com/pycqa/isort
-    rev: 5.12.0
-    hooks:
-      - id: isort
-        args:
-          - "--line-length=240"
-          - "--profile=black"
-          - "--src=src"
+        args: ["--fix"]
+      - id: ruff-format
 
   - repo: https://github.com/codespell-project/codespell
     rev: v2.2.5

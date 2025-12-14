@@ -293,20 +293,14 @@ def repair_json(json_str: str) -> str:
     return state_start(json_str)
 
 
-def base_loads(json_str: str) -> dict[str, Any]:
+def base_loads(json_str: str) -> Any:
     try:
-        result: Any = json5.loads(json_str)
-        if not isinstance(result, dict):
-            raise ValueError("Expected dict, got other type")
-        return result
+        return json5.loads(json_str)
     except Exception:
-        fallback_result: Any = json.loads(json_str, strict=False)
-        if not isinstance(fallback_result, dict):
-            raise ValueError("Expected dict, got other type") from None
-        return fallback_result
+        return json.loads(json_str, strict=False)
 
 
-def loads(json_str: str, auto_repair: bool = True) -> dict[str, Any]:
+def loads(json_str: str, auto_repair: bool = True) -> Any:
     try:
         return base_loads(json_str)
     except Exception:

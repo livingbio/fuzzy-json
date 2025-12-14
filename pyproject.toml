@@ -1,49 +1,82 @@
-[tool.poetry]
+[project]
 name = "fuzy-jon"
 version = "0.0.0"
 description = ""
-authors = ["lucemia <lucemia@gmail.com>"]
+authors = [
+    {name = "lucemia", email = "lucemia@gmail.com"}
+]
 readme = "README.md"
-packages = [{ include = "fuzzy_json", from = "src" }]
-include = ["src/fuzzy_json/py.typed"]
-exclude = ["src/fuzzy_json/tests"]
-license = "MIT"
-homepage = "https://github.com/livingbio/fuzzy-json"
-repository = "https://github.com/livingbio/fuzzy-json"
+license = {text = "MIT"}
+requires-python = ">=3.10"
 keywords = ["openai", "json", "llm"]
 classifiers = [
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
-        'Natural Language :: English',
-        'Operating System :: OS Independent',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.10',
-        'Programming Language :: Python :: 3.11',
-        'Programming Language :: Python :: 3.12',
-        'Programming Language :: Python :: 3.13',
-    ]
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+dependencies = [
+    "json5",
+]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-json5 = "*"
+[project.optional-dependencies]
+dev = [
+    "pre-commit>=4.3.0",
+    "mypy>=1.18.2",
+    "syrupy>=5.0.0",
+    "pytest-cov>=4.1,<6.0",
+    "coveralls>=3.3.1",
+    "pytest-recording>=0.13.4",
+]
 
-[tool.poetry.group.dev]
-optional = true
-
-[tool.poetry.group.dev.dependencies]
-pre-commit = "^4.3.0"
-mypy = "^1.18.2"
-syrupy = "^5.0.0"
-pytest-cov = ">=4.1,<6.0"
-coveralls = "^3.3.1"
-pytest-recording = "^0.13.4"
-
-
-[tool.poetry-dynamic-versioning]
-enable = true
-pattern = "default-unprefixed"
+[project.urls]
+homepage = "https://github.com/livingbio/fuzzy-json"
+repository = "https://github.com/livingbio/fuzzy-json"
 
 [build-system]
-requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
-build-backend = "poetry_dynamic_versioning.backend"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/fuzzy_json"]
+exclude = ["src/fuzzy_json/tests"]
+
+[tool.hatch.build.targets.wheel.shared-data]
+"src/fuzzy_json/py.typed" = "fuzzy_json/py.typed"
+
+[tool.ruff]
+line-length = 240
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+]
+ignore = []
+
+[tool.ruff.lint.isort]
+known-first-party = ["fuzzy_json"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false

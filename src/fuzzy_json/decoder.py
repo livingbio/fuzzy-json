@@ -1,18 +1,21 @@
 import json
+from collections.abc import Callable
 from functools import wraps
-from typing import Any, Callable
+from typing import Any
 
 import json5
 
 
 def state(fn: Callable[[str, list[str]], str | None]) -> Callable[[str, list[str]], str]:
     @wraps(fn)
-    def wrapper(input: str, stack: list[str] = []) -> str:
+    def wrapper(input: str, stack: list[str] | None = None) -> str:
+        if stack is None:
+            stack = []
         try:
             r = fn(input, stack)
             assert r is not None
         except AssertionError:
-            raise ValueError(f"Invalid JSON {input} in {fn.__name__}")
+            raise ValueError(f"Invalid JSON {input} in {fn.__name__}") from None
         return r
 
     return wrapper
@@ -292,9 +295,15 @@ def repair_json(json_str: str) -> str:
 
 def base_loads(json_str: str) -> dict[str, Any]:
     try:
-        return json5.loads(json_str)
+        result: Any = json5.loads(json_str)
+        if not isinstance(result, dict):
+            raise ValueError("Expected dict, got other type")
+        return result
     except Exception:
-        return json.loads(json_str, strict=False)
+        fallback_result: Any = json.loads(json_str, strict=False)
+        if not isinstance(fallback_result, dict):
+            raise ValueError("Expected dict, got other type") from None
+        return fallback_result
 
 
 def loads(json_str: str, auto_repair: bool = True) -> dict[str, Any]:
@@ -307,6 +316,6 @@ def loads(json_str: str, auto_repair: bool = True) -> dict[str, Any]:
     try:
         repaired_json = repair_json(json_str)
     except Exception as e:
-        raise json.decoder.JSONDecodeError(f"Failed to repair JSON: {e}", json_str, 0)
+        raise json.decoder.JSONDecodeError(f"Failed to repair JSON: {e}", json_str, 0) from e
 
     return base_loads(repaired_json)

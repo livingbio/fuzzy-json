@@ -50,6 +50,16 @@ exclude = ["src/fuzzy_json/tests"]
 [tool.hatch.build.targets.wheel.shared-data]
 "src/fuzzy_json/py.typed" = "fuzzy_json/py.typed"
 
+[dependency-groups]
+dev = [
+    "pre-commit>=4.3.0",
+    "mypy>=1.18.2",
+    "syrupy>=5.0.0",
+    "pytest-cov>=4.1,<8.0",
+    "coveralls>=3.3.1",
+    "pytest-recording>=0.13.4",
+]
+
 [tool.ruff]
 line-length = 240
 target-version = "py310"

@@ -104,6 +104,9 @@ def state_value(input: str, stack: list[str]) -> str | None:
     if input[0] == "]":
         assert stack[-1] == "["
         return input[0] + state_post_value(input[1:], stack[:-1])
+    # NOTE: handle missing value after colon (e.g., {"key":} or {"key":,})
+    if input[0] in {",", "}"} and stack[-1] == "{":
+        return "null" + state_post_value(input, stack)
 
     return None
 

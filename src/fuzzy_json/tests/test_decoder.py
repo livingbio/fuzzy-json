@@ -55,3 +55,17 @@ def test_repair_json_fail() -> None:
     with pytest.raises(json.decoder.JSONDecodeError) as _:
         # test that it will raise JSONDecodeError if it can't fix the JSON
         loads("{", auto_repair=True)
+
+
+def test_missing_value_after_colon(snapshot: SnapshotAssertion) -> None:
+    """Test handling of missing values after colon (e.g., {"key":})"""
+    # Single missing value at end
+    assert loads('{"missing_value":}') == {"missing_value": None}
+    # Missing value with trailing comma
+    assert loads('{"missing_value":,}') == {"missing_value": None}
+    # Missing value in middle of object
+    assert loads('{"a": 1, "missing_value":, "b": 2}') == {"a": 1, "missing_value": None, "b": 2}
+    # Multiple missing values
+    assert loads('{"x":, "y":}') == {"x": None, "y": None}
+    # Nested object with missing value
+    assert loads('{"obj": {"missing":}}') == {"obj": {"missing": None}}

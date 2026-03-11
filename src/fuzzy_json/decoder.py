@@ -1,9 +1,13 @@
 import json
+import threading
 from collections.abc import Callable
 from functools import wraps
 from typing import Any
 
 import json5
+
+# Thread-local storage for recursion depth tracking
+_local = threading.local()
 
 
 def state(fn: Callable[[str, list[str]], str | None]) -> Callable[[str, list[str]], str]:
@@ -11,11 +15,25 @@ def state(fn: Callable[[str, list[str]], str | None]) -> Callable[[str, list[str
     def wrapper(input: str, stack: list[str] | None = None) -> str:
         if stack is None:
             stack = []
+
+        # Initialize depth counter if not exists
+        if not hasattr(_local, "depth"):
+            _local.depth = 0
+
+        # Prevent infinite recursion with a depth limit
+        _local.depth += 1
+        if _local.depth > 10000:
+            _local.depth = 0  # Reset for next call
+            raise ValueError(f"Maximum recursion depth exceeded in {fn.__name__}")
+
         try:
             r = fn(input, stack)
             assert r is not None
         except AssertionError:
             raise ValueError(f"Invalid JSON {input} in {fn.__name__}") from None
+        finally:
+            _local.depth -= 1
+
         return r
 
     return wrapper

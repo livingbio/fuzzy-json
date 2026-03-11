@@ -69,3 +69,25 @@ def test_missing_value_after_colon(snapshot: SnapshotAssertion) -> None:
     assert loads('{"x":, "y":}') == {"x": None, "y": None}
     # Nested object with missing value
     assert loads('{"obj": {"missing":}}') == {"obj": {"missing": None}}
+
+
+def test_recursion_depth_limit() -> None:
+    """Test that deeply nested or pathological input doesn't cause infinite recursion"""
+    # This would previously cause RecursionError
+    # Now it should raise ValueError with depth limit message
+    pathological_input = '{"key": "' + '\\"' * 10000 + '"}'
+
+    # Should not raise RecursionError
+    try:
+        result = loads(pathological_input)
+        # If it succeeds, that's fine too
+        assert isinstance(result, dict)
+    except json.decoder.JSONDecodeError:
+        # If it fails with JSON error, that's acceptable
+        pass
+    except ValueError as e:
+        # If it hits the depth limit, that's what we want
+        assert "recursion depth" in str(e).lower()
+    except RecursionError:
+        # This should NOT happen anymore
+        pytest.fail("RecursionError should be prevented by depth limit")

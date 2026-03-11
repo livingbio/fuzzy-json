@@ -45,6 +45,59 @@ args = response.choices[0].message.function_call.arguments
 parsed_json = loads(args) # will auto repair invalid JSON if possible
 ```
 
+## Examples
+
+`fuzzy_json.loads` works as a drop-in replacement for `json.loads`, but automatically repairs common issues found in LLM-generated JSON:
+
+### Trailing commas
+
+```python
+>>> from fuzzy_json import loads
+>>> loads('{"name": "Alice", "age": 30,}')
+{'name': 'Alice', 'age': 30}
+```
+
+### Unescaped quotes inside strings
+
+```python
+>>> loads('{"description": "She said \\"hello\\" to him"}')
+{'description': 'She said "hello" to him'}
+```
+
+### Missing closing braces/brackets
+
+```python
+>>> loads('{"name": "Alice", "items": [1, 2, 3}')
+{'name': 'Alice', 'items': [1, 2, 3]}
+```
+
+### Markdown-wrapped JSON (e.g. `` ```json `` blocks)
+
+```python
+>>> loads('json\n{"name": "Alice"}')
+{'name': 'Alice'}
+```
+
+### Valid JSON passes through unchanged
+
+```python
+>>> loads('{"name": "Alice", "scores": [95, 87, 92]}')
+{'name': 'Alice', 'scores': [95, 87, 92]}
+```
+
+### Disabling auto-repair
+
+If you want strict parsing (no repair), set `auto_repair=False`:
+
+```python
+>>> import json
+>>> try:
+...     loads('{"trailing": "comma",}', auto_repair=False)
+... except json.JSONDecodeError:
+...     print("Invalid JSON!")
+Invalid JSON!
+```
+
 ## Why fuz[z]y-j[s]on?
 
 - Today marks the 3rd birthday of my beloved daughter, Patty, and I'm eager to make it a memorable day for her.

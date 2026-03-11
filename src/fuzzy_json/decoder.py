@@ -211,11 +211,15 @@ def state_int(input: str, stack: list[str]) -> str | None:
             return input[0] + state_object(input[1:], stack)
         return None
     if input[0] == "}":
-        assert stack[-1] == "{"
-        return input[0] + state_post_int_parent(input[1:], stack)
+        if stack[-1] == "{":
+            return input[0] + state_post_int_parent(input[1:], stack)
+        # NOTE: mismatched bracket, delegate to state_post_value which handles inserting missing ]
+        return state_post_value(input, stack)
     if input[0] == "]":
-        assert stack[-1] == "["
-        return input[0] + state_post_int_parent(input[1:], stack)
+        if stack[-1] == "[":
+            return input[0] + state_post_int_parent(input[1:], stack)
+        # NOTE: mismatched bracket, delegate to state_post_value which handles inserting missing }
+        return state_post_value(input, stack)
     if input[0].isspace():
         return input[0] + state_post_value(input[1:], stack)
     # NOTE:
@@ -246,11 +250,15 @@ def state_double(input: str, stack: list[str]) -> str | None:
             return input[0] + state_object(input[1:], stack)
         return None
     if input[0] == "}":
-        assert stack[-1] == "{"
-        return input[0] + state_post_int_parent(input[1:], stack)
+        if stack[-1] == "{":
+            return input[0] + state_post_int_parent(input[1:], stack)
+        # NOTE: mismatched bracket, delegate to state_post_value which handles inserting missing ]
+        return state_post_value(input, stack)
     if input[0] == "]":
-        assert stack[-1] == "["
-        return input[0] + state_post_int_parent(input[1:], stack)
+        if stack[-1] == "[":
+            return input[0] + state_post_int_parent(input[1:], stack)
+        # NOTE: mismatched bracket, delegate to state_post_value which handles inserting missing }
+        return state_post_value(input, stack)
     if input[0].isspace():
         return input[0] + state_post_value(input[1:], stack)
     if input[0] in {"e", "E"}:
@@ -281,11 +289,15 @@ def state_exponent_digits(input: str, stack: list[str]) -> str | None:
             return input[0] + state_object(input[1:], stack)
         return None
     if input[0] == "}":
-        assert stack[-1] == "{"
-        return input[0] + state_post_int_parent(input[1:], stack)
+        if stack[-1] == "{":
+            return input[0] + state_post_int_parent(input[1:], stack)
+        # NOTE: mismatched bracket, delegate to state_post_value which handles inserting missing ]
+        return state_post_value(input, stack)
     if input[0] == "]":
-        assert stack[-1] == "["
-        return input[0] + state_post_int_parent(input[1:], stack)
+        if stack[-1] == "[":
+            return input[0] + state_post_int_parent(input[1:], stack)
+        # NOTE: mismatched bracket, delegate to state_post_value which handles inserting missing }
+        return state_post_value(input, stack)
     if input[0].isspace():
         return input[0] + state_post_value(input[1:], stack)
     return None

@@ -22,19 +22,17 @@ def state(fn: Callable[[str, list[str]], str | None]) -> Callable[[str, list[str
 
         # Prevent infinite recursion with a depth limit
         _local.depth += 1
-        if _local.depth > 10000:
-            _local.depth = 0  # Reset for next call
-            raise ValueError(f"Maximum recursion depth exceeded in {fn.__name__}")
-
         try:
+            if _local.depth > 10000:
+                raise ValueError(f"Maximum recursion depth exceeded in {fn.__name__}")
+
             r = fn(input, stack)
             assert r is not None
+            return r
         except AssertionError:
             raise ValueError(f"Invalid JSON {input} in {fn.__name__}") from None
         finally:
             _local.depth -= 1
-
-        return r
 
     return wrapper
 
@@ -167,7 +165,16 @@ def state_value_string(input: str, stack: list[str]) -> str | None:
             try:
                 return input[: i + 1] + state_post_value(input[i + 1 :], stack)
             except ValueError:
-                # NOTE: assume there is missing escape char
+                # Check what follows the quote to decide if we should retry with escape
+                next_part = input[i + 1 :].lstrip()
+                if next_part and next_part[0] in {',', '}', ']'}:
+                    # Quote is likely end of string, don't retry - propagate error
+                    raise
+                # Quote might be in string content (e.g., smart quotes), try escaping
+                # But limit retries to prevent infinite loop
+                if i > 0 and input[i-1:i+1] == '\\"':
+                    # We already have escape before this quote, don't retry again
+                    raise
                 return input[:i] + state_value_string("\\" + input[i:], stack)
 
         if input[i] == "\\":

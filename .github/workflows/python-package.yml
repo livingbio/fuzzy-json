@@ -26,9 +26,9 @@ jobs:
       - name: Install dependencies
         run: |
           uv sync --extra dev
-      - name: Lint with pre-commit
+      - name: Lint with prek
         run: |
-          uv run pre-commit run --all-files
+          uv run prek run --all-files
       - name: Test with pytest
         run: |
           uv run pytest ./src --cov=./src --record-mode=none --cov-report xml

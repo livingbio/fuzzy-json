@@ -34,7 +34,7 @@ uv sync --extra dev
 uv run pytest ./src --cov=./src --record-mode=none --cov-report xml
 
 # Run all linting and formatting checks
-uv run pre-commit run --all-files
+uv run prek run --all-files
 
 # Individual tools
 uv run ruff check src/          # Lint

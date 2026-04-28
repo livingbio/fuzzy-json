@@ -27,7 +27,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-    "pre-commit>=4.3.0",
+    "pre-commit>=4.6.0",
     "mypy>=1.20.2",
     "syrupy>=5.0.0",
     "pytest-cov>=7.1.0,<8.0",

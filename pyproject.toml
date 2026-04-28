@@ -52,7 +52,7 @@ exclude = ["src/fuzzy_json/tests"]
 
 [dependency-groups]
 dev = [
-    "prek>=0.1.0",
+    "prek>=0.3.11",
     "mypy>=1.20.2",
     "syrupy>=5.0.0",
     "pytest-cov>=7.1.0,<8.0",
